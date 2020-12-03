@@ -3,7 +3,7 @@ package com.mybank.domain;
 /**
  * @author camara
  */
-public enum Operation {
+public enum OperationType {
 	DEPOSIT,
-	WITHDRAW
+	WITHDRAWAL
 }

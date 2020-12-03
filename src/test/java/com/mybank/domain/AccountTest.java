@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
         @Test
         public void shouldReturnBalanceEqualsToMyDeposit() throws ParseException {
             Account account = new Account();
-            assertEquals(0, account.getBalance(), 0);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             account.deposit(5000.0, dateFormat.parse("03/12/2020"));
             assertEquals("The balance should be 5000 ",5000.0, account.getBalance(), 0);

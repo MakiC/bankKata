@@ -14,13 +14,42 @@ public class Transaction {
     private final Date DATE;
     private final double NEW_BALANCE ;
     private final double AMOUNT;
-    private final Operation OPERATION_TYPE;
+    private final OperationType OPERATION_TYPE;
+    public static class TransactionBuilder{
+        private final OperationType OPERATION_TYPE;
+        private final Date DATE;
+        private double amount;
+        private double balance;
 
-    public Transaction(Operation operation, Date date,Double amount, double balance) {
-        OPERATION_TYPE =operation;
-        DATE=date;
-        AMOUNT= amount;
-        NEW_BALANCE=computeNewBalance(balance);
+        /**
+         * This Builder helps to better instanciate a Transaction
+         * @param operationType
+         * @param date
+         */
+        public TransactionBuilder(OperationType operationType, Date date){
+            this.OPERATION_TYPE=operationType;
+            this.DATE=date;
+        }
+        
+        public TransactionBuilder withAmount(double amount){
+            this.amount=amount;
+            return this;
+        }
+        public TransactionBuilder withBalance(double balance){
+            this.balance=balance;
+            return this;
+        }
+        public Transaction build(){
+            return new Transaction(this);
+        }
+        
+    }
+
+    private Transaction(TransactionBuilder transactionBuilder){
+        OPERATION_TYPE = transactionBuilder.OPERATION_TYPE;
+        DATE=transactionBuilder.DATE;
+        AMOUNT= transactionBuilder.amount;
+        NEW_BALANCE=computeNewBalance(transactionBuilder.balance);
     }
 
     public Date getDATE() {
@@ -35,13 +64,13 @@ public class Transaction {
         return AMOUNT;
     }
 
-    public Operation getOPERATION_TYPE() {
+    public OperationType getOPERATION_TYPE() {
         return OPERATION_TYPE;
 
     }
 
     private Double computeNewBalance(Double balance) {
-        int operationSign= Operation.DEPOSIT.equals(OPERATION_TYPE)?1:-1;
+        int operationSign= OperationType.DEPOSIT.equals(OPERATION_TYPE)?1:-1;
         if(balance+operationSign*AMOUNT<0) throw new AmountExceededException("Choose a lower amount, your balance is "+ balance);
         else{balance+=operationSign*AMOUNT;}
 
@@ -53,7 +82,7 @@ public class Transaction {
       StringBuilder result=new StringBuilder();
       String creditColumn=" | ";
         String debitColumn=" | ";
-      if(Operation.WITHDRAW.equals(OPERATION_TYPE)) {creditColumn= " |       | ";}
+      if(OperationType.WITHDRAWAL.equals(OPERATION_TYPE)) {creditColumn= " |       | ";}
       else{
           debitColumn= " |       | ";
       }

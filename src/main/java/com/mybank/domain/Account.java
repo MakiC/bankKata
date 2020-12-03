@@ -18,13 +18,18 @@ public class Account {
     }
 
     public void deposit(Double credit, Date date) {
-        Transaction transaction=new Transaction(Operation.DEPOSIT,date,credit,balance);
+        Transaction transaction=new Transaction.TransactionBuilder(OperationType.DEPOSIT, date)
+                .withAmount(credit)
+                .withBalance(balance).build();
         balance=transaction.getNEW_BALANCE();
         history.add(transaction);
     }
 
     public void withdraw(Double debit, Date date) {
-        Transaction transaction=new Transaction(Operation.WITHDRAW,date,debit,balance);
+        Transaction transaction= new Transaction.TransactionBuilder(OperationType.WITHDRAWAL, date)
+                .withAmount(debit)
+                .withBalance(balance).build();
+
         balance=transaction.getNEW_BALANCE();
         history.add(transaction);
     }
