@@ -1,48 +1,41 @@
-package katabank.domain;
+package com.mybank.domain;
 
-import katabank.exception.AmountExcidedException;
-import katabank.service.DateService;
+import com.mybank.service.HistoryService;
+
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 /**
  * @author camara
  */
 public class Account {
-    private double balance;
-    private List<Transaction> transactions;
-    private HistoryService
+    private final double INITIAL_BALANCE = 0;
+    private Double balance = INITIAL_BALANCE;
+    private final HistoryService history;
 
-
-    public Account(){
-        balance=0;
-        transactions=new ArrayList<Transaction>();
-    }
-    public void deposit(Double credit, String date) {
-        balance+=credit;
-        transactions.add(new Transaction(Operation.DEPOSIT,credit,date));
+    public Account() {
+        history=new HistoryService();
     }
 
-    public void withdraw(Double debit, String date) {
-      if(balance<debit) throw new AmountExcidedException("Choose a lower amount, your balance is "+ balance);
-        balance-=debit;
+    public void deposit(Double credit, Date date) {
+        Transaction transaction=new Transaction(Operation.DEPOSIT,date,credit,balance);
+        balance=transaction.getNEW_BALANCE();
+        history.add(transaction);
     }
 
+    public void withdraw(Double debit, Date date) {
+        Transaction transaction=new Transaction(Operation.WITHDRAW,date,debit,balance);
+        balance=transaction.getNEW_BALANCE();
+        history.add(transaction);
+    }
     public Double getBalance() {
-        return this.balance;
+        return balance;
     }
 
     public void printStatement(PrintStream out) {
-                DateService loc=new DateService();
-                loc.convertToDate();
+               history.printStatement(out);
            }
-
-
     }
 
-
-
-}
 
 

@@ -2,7 +2,7 @@ package com.mybank.exception;
 /**
  * @author camara
  */
-public class AmountExcidedException extends RuntimeException {
+public class AmountExceededException extends RuntimeException {
 
-    public AmountExcidedException(String message){super(message);}
+    public AmountExceededException(String message){super(message);}
 }

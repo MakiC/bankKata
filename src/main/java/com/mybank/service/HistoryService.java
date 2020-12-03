@@ -23,9 +23,9 @@ public class HistoryService {
 
     public void printStatement(PrintStream out) {
 
-        String HEADER = "OPERATION TYPE | Credit | Debit | Balance | Date |";
-
-        out.println(HEADER);
-        TRANSACTIONS.forEach(e->out.println(e));
+        String HEADER = "OPERATION | Credit | Debit | Balance | Date |\n";
+       TRANSACTIONS.sort((e1,e2)->-e1.getDATE().toInstant().compareTo(e2.getDATE().toInstant()));
+        out.print(HEADER);
+        TRANSACTIONS.forEach(e->out.print(e));
     }
 }

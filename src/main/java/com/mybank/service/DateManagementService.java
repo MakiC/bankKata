@@ -18,7 +18,7 @@ public class DateManagementService {
 	}
 
 	public static Date convertToDate(String dateString) {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MMM/yyyy", Locale.FRENCH);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
 
 		try{return formatter.parse(dateString);}
 		catch (ParseException e) {

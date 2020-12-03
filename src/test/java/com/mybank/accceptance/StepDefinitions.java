@@ -39,29 +39,3 @@ public class StepDefinitions {
         assertEquals(expectedOutput, outContent.toString());
     }
 }
-
-/**
- *  Account account=new Account();
- *     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
- *     @Given("I deposit money {credit} on the date {dateInString}")
- *     public void iDepositMoneyOnTheDate(Double credit, String dateInString ) {
- *         Date date= DateManagementService.convertToDate(dateInString);
- *        account.deposit(credit,date);
- *     }
- *
- *
- *     @Given("I withdraw money {debit} on the date{dateInString}")
- *     public void iWithdrawMoneyOnTheDate(Double debit, String dateInString) {
- *         Date date=DateManagementService.convertToDate(dateInString);
- *        account.deposit(debit,date);
- *     }
- *     @When("I print account statement")
- *     public void iPrintAccountStatement() {
- *         System.setOut(new PrintStream(outContent));
- *         account.printStatement(System.out);
- *     }
- *     @Then("I should see")
- *     public void iShouldSee(String expectedOutput) {
- *         assertEquals(expectedOutput, outContent.toString());
- *     }
- */

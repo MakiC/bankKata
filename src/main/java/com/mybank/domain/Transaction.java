@@ -51,17 +51,22 @@ public class Transaction {
     @Override
     public String toString() {
       StringBuilder result=new StringBuilder();
-      String creditOrDebitColumn="";
-      if(Operation.WITHDRAW.equals(OPERATION_TYPE)) creditOrDebitColumn= "\t\\t";
+      String creditColumn=" | ";
+        String debitColumn=" | ";
+      if(Operation.WITHDRAW.equals(OPERATION_TYPE)) {creditColumn= " |       | ";}
+      else{
+          debitColumn= " |       | ";
+      }
 
         result.append(getOPERATION_TYPE().toString())
-                .append(" | ")
+                .append(creditColumn)
                 .append(AMOUNT)
-                .append(" | ")
-                .append(creditOrDebitColumn)
+                .append(debitColumn)
                 .append(NEW_BALANCE)
+                .append(" | ")
                 .append(DateManagementService.format(DATE))
-                .append(" |");
+                .append(" |")
+                .append("\n");
 
         return result.toString();
 
