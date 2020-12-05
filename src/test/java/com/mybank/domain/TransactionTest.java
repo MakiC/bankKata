@@ -9,8 +9,9 @@ public class TransactionTest {
     @Test
     public void shouldComputeNewBalanceAfterWithdrawal()  {
 
-        Transaction transaction=new Transaction.TransactionBuilder(OperationType.WITHDRAWAL,
-                DateManagementService.convertToDate("03/12/2020"))
+        Transaction transaction=Account.getTransactionBuilder()
+                .withOperationType(OperationType.WITHDRAWAL)
+                .withDate(DateManagementService.convertToDate("03/12/2020"))
                 .withAmount(5000.0)
                 .withBalance(6000)
                 .build();
@@ -19,8 +20,9 @@ public class TransactionTest {
 
     @Test
     public void shouldComputeNewBalanceAfterDeposit()  {
-        Transaction transaction=new Transaction.TransactionBuilder(OperationType.DEPOSIT,
-                DateManagementService.convertToDate("05/12/2020"))
+        Transaction transaction=Account.getTransactionBuilder()
+                .withOperationType(OperationType.DEPOSIT)
+                .withDate(DateManagementService.convertToDate("05/12/2020"))
                 .withAmount(5000.0)
                 .withBalance(6000)
                 .build();

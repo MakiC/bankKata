@@ -12,13 +12,16 @@ public class Account {
     private final double INITIAL_BALANCE = 0;
     private Double balance = INITIAL_BALANCE;
     private final HistoryService history;
+    private static final Transaction.TransactionBuilder transactionBuilder=new Transaction.TransactionBuilder();;
 
     public Account() {
         history=new HistoryService();
     }
 
     public void deposit(Double credit, Date date) {
-        Transaction transaction=new Transaction.TransactionBuilder(OperationType.DEPOSIT, date)
+        Transaction transaction=transactionBuilder
+                .withOperationType(OperationType.DEPOSIT)
+                .withDate(date)
                 .withAmount(credit)
                 .withBalance(balance).build();
         balance=transaction.getNEW_BALANCE();
@@ -26,7 +29,9 @@ public class Account {
     }
 
     public void withdraw(Double debit, Date date) {
-        Transaction transaction= new Transaction.TransactionBuilder(OperationType.WITHDRAWAL, date)
+        Transaction transaction= transactionBuilder
+                .withOperationType(OperationType.WITHDRAWAL)
+                .withDate(date)
                 .withAmount(debit)
                 .withBalance(balance).build();
 
@@ -35,6 +40,10 @@ public class Account {
     }
     public Double getBalance() {
         return balance;
+    }
+
+    public static Transaction.TransactionBuilder getTransactionBuilder() {
+        return transactionBuilder;
     }
 
     public void printStatement(PrintStream out) {

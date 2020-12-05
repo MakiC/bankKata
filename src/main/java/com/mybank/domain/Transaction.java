@@ -16,21 +16,23 @@ public class Transaction {
     private final double AMOUNT;
     private final OperationType OPERATION_TYPE;
     public static class TransactionBuilder{
-        private final OperationType OPERATION_TYPE;
-        private final Date DATE;
+        private OperationType OPERATION_TYPE;
+        private Date DATE;
         private double amount;
         private double balance;
 
         /**
          * This Builder helps to better instanciate a Transaction
-         * @param operationType
-         * @param date
          */
-        public TransactionBuilder(OperationType operationType, Date date){
-            this.OPERATION_TYPE=operationType;
+        public TransactionBuilder(){}
+        public TransactionBuilder withDate(Date date){
             this.DATE=date;
+            return this;
         }
-        
+        public TransactionBuilder withOperationType(OperationType operationType){
+            this.OPERATION_TYPE=operationType;
+            return this;
+        }
         public TransactionBuilder withAmount(double amount){
             this.amount=amount;
             return this;

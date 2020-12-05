@@ -41,8 +41,10 @@ import static org.junit.Assert.assertTrue;
             account.deposit(5000.0, dateFormat.parse("03/12/2020"));
             account.withdraw(3000.0, dateFormat.parse("05/12/2020"));
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            PrintStream console = System.out;
             System.setOut(new PrintStream(outContent));
             account.printStatement(System.out);
+            System.setOut(console);
             String expectedOutput = new Scanner(new File("src/test/resources/com/mybank/account/expectedStatement.txt")).useDelimiter("\\Z")
                     .next();
             expectedOutput=expectedOutput.replaceAll("\r","");

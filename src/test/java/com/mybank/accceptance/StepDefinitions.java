@@ -31,8 +31,10 @@ public class StepDefinitions {
     }
     @When("I print account statement")
     public void iPrintAccountStatement() {
+        PrintStream console = System.out;
         System.setOut(new PrintStream(outContent));
         account.printStatement(System.out);
+        System.setOut(console);
     }
     @Then("I should see")
     public void iShouldSee(String expectedOutput) {
