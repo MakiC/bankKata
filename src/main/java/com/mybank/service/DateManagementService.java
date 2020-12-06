@@ -1,6 +1,6 @@
 package com.mybank.service;
 
-import com.mybank.exception.DateNotWellFormattedException;
+import com.mybank.exceptions.DateNotWellFormattedException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +23,10 @@ public class DateManagementService {
 
 		try{return formatter.parse(dateString);}
 		catch (ParseException e) {
-			throw new DateNotWellFormattedException("Failed to convert value " + dateString + " with date format " + (formatter).toPattern(), e);
+			throw new DateNotWellFormattedException("Failed to convert value " + dateString + " with date format " + (formatter).toPattern());
 		}
+		 catch (NullPointerException e){
+			 throw new DateNotWellFormattedException("Date Cannot be null");
+		 }
 	}
 }

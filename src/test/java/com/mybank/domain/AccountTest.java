@@ -24,6 +24,22 @@ import static org.junit.Assert.assertTrue;
         }
 
         @Test
+        public void shouldThrowBalanceEqualsToMyDepositMinusMyWithdrawal() throws ParseException {
+            Account account = new Account();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            account.deposit(5000.0, dateFormat.parse("03/12/2020"));
+            account.withdraw(3000.0, dateFormat.parse("05/12/2020"));
+            assertEquals("The balance should be 5000 - 3000 = 2000",2000.0, account.getBalance(), 0);
+        }
+        @Test
+        public void shouldThrowBalanceEqualsToMyDeposit() throws ParseException {
+            Account account = new Account();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            account.deposit(5000.0, dateFormat.parse("03/12/2020"));
+            assertEquals("The balance should be 5000 ",5000.0, account.getBalance(), 0);
+        }
+
+        @Test
         public void shouldReturnBalanceEqualsToMyDepositMinusMyWithdrawal() throws ParseException {
             Account account = new Account();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -32,7 +48,6 @@ import static org.junit.Assert.assertTrue;
             assertEquals("The balance should be 5000 - 3000 = 2000",2000.0, account.getBalance(), 0);
         }
 
-        @SuppressWarnings("resource")
         @Test
         public void shouldReturnPrintedStatementEqualsToExpectedStatement() throws ParseException, IOException {
             Account account = new Account();

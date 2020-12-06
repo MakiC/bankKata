@@ -10,7 +10,7 @@ public class LaunchBankApp {
             Account account = new Account();
             account.deposit(4500.0, DateManagementService.convertToDate("10/11/2020"));
             account.deposit(2000.0,  DateManagementService.convertToDate("13/12/2020"));
-            account.withdraw(500.0,  DateManagementService.convertToDate("14/12/2020"));
+            account.withdraw(-500.0,  DateManagementService.convertToDate("14/12/2020"));
 
             account.printStatement(System.out);
         }

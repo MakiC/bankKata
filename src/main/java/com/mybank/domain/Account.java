@@ -1,9 +1,16 @@
 package com.mybank.domain;
 
+import com.mybank.exceptions.TransactionInvalidException;
 import com.mybank.service.HistoryService;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.PrintStream;
 import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author camara
@@ -24,6 +31,7 @@ public class Account {
                 .withDate(date)
                 .withAmount(credit)
                 .withBalance(balance).build();
+        validateTransaction(transaction);
         balance=transaction.getNEW_BALANCE();
         history.add(transaction);
     }
@@ -34,10 +42,23 @@ public class Account {
                 .withDate(date)
                 .withAmount(debit)
                 .withBalance(balance).build();
-
+        validateTransaction(transaction);
         balance=transaction.getNEW_BALANCE();
         history.add(transaction);
     }
+
+    private void validateTransaction(Transaction transaction) {
+        ValidatorFactory factory= Validation.buildDefaultValidatorFactory();
+        Validator validator=factory.getValidator();
+        Set<ConstraintViolation<Transaction>> constrainViolations = validator.validate(transaction);
+        if(constrainViolations.size()>0)
+            throw new TransactionInvalidException(
+                    "Transaction Not Valid:"
+                            +constrainViolations.stream().map(constraint ->
+                            constraint.getPropertyPath()+" "+constraint.getMessage()).collect(Collectors.joining(",")));
+
+    }
+
     public Double getBalance() {
         return balance;
     }

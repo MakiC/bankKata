@@ -1,4 +1,4 @@
-package com.mybank.exception;
+package com.mybank.exceptions;
 /**
  * @author camara
  */

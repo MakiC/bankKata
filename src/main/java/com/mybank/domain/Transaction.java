@@ -1,8 +1,10 @@
 package com.mybank.domain;
 
-import com.mybank.exception.AmountExceededException;
+import com.mybank.exceptions.AmountExceededException;
 import com.mybank.service.DateManagementService;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,9 +12,10 @@ import java.util.Objects;
  * @author camara
  */
 public class Transaction {
-
+    @NotNull
     private final Date DATE;
     private final double NEW_BALANCE ;
+    @Min(0)
     private final double AMOUNT;
     private final OperationType OPERATION_TYPE;
     public static class TransactionBuilder{
