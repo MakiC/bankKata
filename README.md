@@ -26,6 +26,10 @@ In order to check my operations
 As a bank client
 I want to see the history (operation, date, amount, balance) of my operations
 
-To run the tests, go into the root folder of the project and simply execute the following command : mvn test
+To run the tests, go into the root folder of the project and simply execute the following command :
+
+```sh
+mvn test
+```
 
 
