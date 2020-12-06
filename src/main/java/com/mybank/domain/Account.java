@@ -19,44 +19,45 @@ public class Account {
     private final double INITIAL_BALANCE = 0;
     private Double balance = INITIAL_BALANCE;
     private final HistoryService history;
-    private static final Transaction.TransactionBuilder transactionBuilder=new Transaction.TransactionBuilder();;
+    private static final Transaction.TransactionBuilder transactionBuilder = new Transaction.TransactionBuilder();
+
 
     public Account() {
-        history=new HistoryService();
+        history = new HistoryService();
     }
 
     public void deposit(Double credit, Date date) {
-        Transaction transaction=transactionBuilder
+        Transaction transaction = transactionBuilder
                 .withOperationType(OperationType.DEPOSIT)
                 .withDate(date)
                 .withAmount(credit)
                 .withBalance(balance).build();
         validateTransaction(transaction);
-        balance=transaction.getNEW_BALANCE();
+        balance = transaction.getNewBalance();
         history.add(transaction);
     }
 
     public void withdraw(Double debit, Date date) {
-        Transaction transaction= transactionBuilder
+        Transaction transaction = transactionBuilder
                 .withOperationType(OperationType.WITHDRAWAL)
                 .withDate(date)
                 .withAmount(debit)
                 .withBalance(balance).build();
         validateTransaction(transaction);
-        balance=transaction.getNEW_BALANCE();
+        balance = transaction.getNewBalance();
         history.add(transaction);
     }
 
     private void validateTransaction(Transaction transaction) {
-        ValidatorFactory factory= Validation.buildDefaultValidatorFactory();
-        Validator validator=factory.getValidator();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
         Set<ConstraintViolation<Transaction>> constrainViolations = validator.validate(transaction);
-        if(constrainViolations.size()>0)
+        if (constrainViolations.size() > 0) {
             throw new TransactionInvalidException(
                     "Transaction Not Valid:"
-                            +constrainViolations.stream().map(constraint ->
-                            constraint.getPropertyPath()+" "+constraint.getMessage()).collect(Collectors.joining(",")));
-
+                            + constrainViolations.stream().map(constraint ->
+                            constraint.getPropertyPath() + " " + constraint.getMessage()).collect(Collectors.joining(",")));
+        }
     }
 
     public Double getBalance() {
@@ -68,9 +69,9 @@ public class Account {
     }
 
     public void printStatement(PrintStream out) {
-               history.printStatement(out);
-           }
+        history.printStatement(out);
     }
+}
 
 
 

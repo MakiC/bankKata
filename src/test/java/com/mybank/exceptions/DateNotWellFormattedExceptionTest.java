@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Assertions;
 public class DateNotWellFormattedExceptionTest {
 
     @Test
-    public void shouldThrowDateNotWellFormattedException(){
+    public void shouldThrowDateNotWellFormattedException() {
         Account account = new Account();
         Assertions.assertThrows(DateNotWellFormattedException.class, () -> {
-                account.deposit(8000.0, DateManagementService.convertToDate("er/11/2020"));
-            });
-        }
+            account.deposit(8000.0, DateManagementService.convertToDate("er/11/2020"));
+        });
+    }
 
 }
