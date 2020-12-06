@@ -19,17 +19,14 @@ public class Transaction {
     private final double amount;
     private final OperationType operationType;
 
+    /**
+     * This Builder helps to better instanciate a Transaction
+     */
     public static class TransactionBuilder {
         private OperationType operationType;
         private Date date;
         private double amount;
         private double balance;
-
-        /**
-         * This Builder helps to better instanciate a Transaction
-         */
-        public TransactionBuilder() {
-        }
 
         public TransactionBuilder withDate(Date date) {
             this.date = date;
