@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class AccountTest {
 
@@ -68,6 +67,5 @@ public class AccountTest {
         assertEquals("The printed statement should be the same as expected statement", expectedOutput, outContent.toString());
 
     }
-
 }
 

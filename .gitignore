@@ -5,3 +5,4 @@
 .classpath
 *.iml
 
+/log/log.out

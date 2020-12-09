@@ -31,5 +31,6 @@ To run the tests, go into the root folder of the project and simply execute the 
 ```sh
 mvn test
 ```
+The main class at com.mybank.LaunchBankApp.java also contains example of run taking into account exceptions 
 
 

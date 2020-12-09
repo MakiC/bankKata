@@ -18,6 +18,12 @@ public class DateManagementService {
         return formatter.format(date);
     }
 
+    /**
+     *
+     * @param  dateString the given date in string format
+     * @return a Date in dd/MM/yyyy format corresponding to the input string
+     * @throws DateNotWellFormattedException in case of a failed conversion, or a null date
+     */
     public static Date convertToDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
 
